@@ -7,17 +7,24 @@
 
 import Foundation
 
+
 struct Game {
-    var target: Int = 42
-    var score: Int = 0
-    var round: Int = 1
+    var target = Int.random(in: 1...100)
+    var score = 0
+    var round = 1
     
-    func getStringTarget() -> String {
-        return String(target)
+    mutating func addScore(sliderValue: Int) -> Void {
+        score += abs(sliderValue - self.target)
     }
     
-    mutating func points(sliderValue: Int) -> Int {
-        self.score += sliderValue
-        return score
+    mutating func nextRound() {
+        round += 1
+        target = Int.random(in: 1...100)
+    }
+    
+    mutating func restartGame() {
+        round = 0
+        score = 0
+        nextRound()
     }
 }
